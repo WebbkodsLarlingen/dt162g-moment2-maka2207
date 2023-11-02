@@ -3,7 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <script defer="defer" src="/main.js"></script>
+    <link rel="stylesheet" href="/styles.css" />
+    <title>
+      HT2023 DT162G Datateknik GR (B), Javascriptbaserad webbutveckling, 7,5 hp
+      (distans) - Moment 2 | maka2207
+    </title>
   </head>
-  <body></body>
+  <body>
+    <header><h1>NodeJS - Moment 2 | NodeJS Webbtjänst med JSON-fil</h1></header>
+    <main>
+      <h2>Kurser jag har läst:</h2>
+      <table id="courseTable">
+        <thead>
+          <tr>
+            <td>Kurskod</td>
+            <td>Kursnamn</td>
+            <td style="text-align: center">Period</td>
+            <td style="text-align: center">Hantera</td>
+          </tr>
+        </thead>
+        <tbody id="tb"></tbody>
+        <tfoot></tfoot>
+      </table>
+      <h2>Lägg till ny kurs</h2>
+      <div class="form-part form-btn"><p id="status"></p></div>
+      <form>
+        <div class="form-part">
+          <div class="inner-form">
+            <label for="courseid">Kurskod:</label>
+            <input type="text" id="courseid" maxlength="6" required />
+          </div>
+          <div class="inner-form">
+            <label for="coursename">Kursnamn:</label>
+            <input type="text" id="coursename" required />
+          </div>
+        </div>
+        <div class="form-part2">
+          <div class="inner-form">
+            <label for="courseprogression">Kursperiod:</label>
+            <input type="text" id="courseperiod" maxlength="1" required />
+          </div>
+          <div class="form-part form-btn">
+            <button id="postCourse">Lägg till kurs</button>
+            <button id="resetcourses">Återställ allt</button>
+            <button id="abortUpdate" style="display: none">Avbryt</button>
+          </div>
+        </div>
+      </form>
+    </main>
+    <footer>
+      <p id="footer-text">
+        © 2023 maka2207/WebbKodsLärlingen - HT2023 DT162G Datateknik GR (B),
+        Javascriptbaserad webbutveckling, 7,5 hp (distans) - Moment 2
+      </p>
+    </footer>
+  </body>
 </html>

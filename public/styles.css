@@ -1,0 +1,233 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Georgia;
+}
+body {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+footer,
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffb6c1;
+}
+header {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  height: 100px;
+}
+#courseTable {
+  margin: 0 auto;
+  width: 80%;
+}
+#status {
+  font-weight: bold;
+  padding: 1rem;
+  border: 1px solid ghostwhite;
+}
+footer {
+  height: 100px;
+  margin-top: 1.5rem;
+}
+footer > p,
+h1,
+h2 {
+  font-weight: 700;
+  text-align: center;
+}
+footer > p,
+h1 {
+  padding: 1rem;
+}
+#footer-text {
+  font-size: 0.8rem;
+}
+h2 {
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+}
+button:focus,
+button:hover {
+  cursor: pointer;
+  background-color: #ffe0e5;
+}
+#abortUpdate:focus,
+#abortUpdate:hover {
+  cursor: pointer;
+  background-color: #d23636;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+input[type="text"] {
+  height: 44px;
+  font-size: 1.1rem;
+  padding: 5px;
+  outline: 1px solid pink;
+  border: none;
+}
+input[type="text"]:focus,
+input[type="text"]:hover {
+  border: 1px solid pink;
+  border-radius: 5px;
+}
+td[data-deletecourse]:hover {
+  background-color: red;
+  cursor: pointer;
+}
+label {
+  font-weight: 700;
+}
+.form-part {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+.form-part2 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4rem;
+}
+.inner-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 300px;
+  gap: 10px;
+}
+button {
+  border-radius: 5px;
+  padding: 13px;
+  font-size: 1rem;
+  width: fit-content;
+  outline: 1px solid pink;
+  background-color: pink;
+}
+thead {
+  background-color: ivory;
+  font-weight: 700;
+}
+td {
+  outline: 1px solid pink;
+  padding: 15px;
+}
+td > a {
+  text-decoration: none;
+}
+td > a:hover {
+  color: #f66;
+}
+@media only screen and (max-width: 600px) {
+  thead {
+    display: none;
+  }
+  td,
+  td > * {
+    font-size: 0.9rem;
+    outline: none;
+  }
+  table {
+    outline: 1px solid pink;
+  }
+  td {
+    display: block;
+  }
+  td:first-child {
+    background-color: ivory;
+  }
+  td:last-child {
+    border-bottom: 1px solid pink;
+  }
+  tr:last-child > td:last-child {
+    border-bottom: none;
+  }
+  td:first-child:before {
+    content: "Kurskod: ";
+  }
+  td:nth-child(2):before {
+    content: "Kursnamn: ";
+  }
+  td:nth-child(3):before {
+    content: "Period: ";
+  }
+  td:nth-child(4):before {
+    content: "Hantera: ";
+  }
+  td:first-child,
+  td:nth-child(2),
+  td:nth-child(3),
+  td:nth-child(4) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left !important;
+  }
+  td:first-child:before,
+  td:nth-child(2):before,
+  td:nth-child(3):before,
+  td:nth-child(4):before {
+    font-weight: 700;
+    color: #000;
+  }
+  td:last-child > a:first-child {
+    margin-left: auto;
+    margin-right: 1rem;
+  }
+  td:last-child > a {
+    font-size: 1.2rem;
+  }
+  h1 {
+    font-size: 1.4rem;
+    line-height: 1.3;
+  }
+  h2 {
+    font-size: 1.3rem;
+  }
+  form {
+    gap: 0;
+  }
+  .form-part {
+    flex-direction: column;
+    margin: 0 auto;
+    gap: 0;
+  }
+  .form-part2 {
+    gap: 0;
+  }
+  .inner-form {
+    gap: 5px;
+    margin: 1rem;
+  }
+  #status {
+    margin-top: 1rem;
+    padding: 0;
+    text-align: center;
+  }
+  footer > p {
+    font-size: 0.7rem;
+    line-height: 1.5;
+  }
+  #abortUpdate {
+    margin: 0 auto;
+    margin-top: 1rem;
+  }
+  #resetcourses {
+    margin-top: 1rem;
+  }
+  #resetcourses,
+  #postCourse {
+    width: 125px;
+  }
+}
