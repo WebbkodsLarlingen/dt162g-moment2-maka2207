@@ -7,6 +7,9 @@ const apiRouter = require("./routes/api");
 // Use the "public" folder for web browser pages
 app.use(express.static("public"));
 
+// Use JSON Parser in Express so we can grab `req.body` JSON data
+app.use(express.json());
+
 // Redirect all incoming requsts to the API router
 app.use("/api", apiRouter);
 

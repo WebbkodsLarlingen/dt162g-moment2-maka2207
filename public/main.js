@@ -24,9 +24,9 @@ function loadcourse(url) {
       tbody.innerHTML = "";
       if (!data.message) {
         // Next loop through it from courses JSON data
-        tbody.innerHTML += `<tr><td>${data.courseId}</td>
-  <td>${data.courseName}</td>
-  <td>${data.coursePeriod}</td>
+        tbody.innerHTML += `<tr><td contenteditable="true">${data.courseId}</td>
+  <td contenteditable="true">${data.courseName}</td>
+  <td contenteditable="true">${data.coursePeriod}</td>
   <td style="text-align:center;"data-deletecourse="${data._id}">🗑️</td></tr>`;
       } else {
         apistatus.innerHTML = "Kursen du navigerade till finns inte!";
@@ -44,9 +44,9 @@ function loadCourses() {
       tbody.innerHTML = "";
       // Next loop through it from courses JSON data
       data.forEach((course) => {
-        tbody.innerHTML += `<tr><td>${course.courseId}</td>
-  <td>${course.courseName}</td>
-  <td>${course.coursePeriod}</td>
+        tbody.innerHTML += `<tr><td contenteditable="true">${course.courseId}</td>
+  <td contenteditable="true">${course.courseName}</td>
+  <td contenteditable="true">${course.coursePeriod}</td>
   <td style="text-align:center;"data-deletecourse="${course._id}">🗑️</td></tr>`;
       });
     });
@@ -138,6 +138,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // Listening for clicks on "Lägg till kurs"
   addcourseBtn.addEventListener("click", (e) => {
     addcourse();
+  });
+
+  // Listen for changing the content of the <td> that have contenteditable enabled!
+  tbody.addEventListener("input", (e) => {
+    if (e.target.tagName === "TD" && e.target.isContentEditable) {
+      console.log("Yup!");
+    }
   });
 });
 
