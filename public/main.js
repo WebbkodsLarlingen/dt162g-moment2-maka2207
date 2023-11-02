@@ -16,7 +16,6 @@ const addcourseBtn = document.getElementById("postCourse");
 function loadcourse(url) {
   // Grab the id for the course
   const realurl = url.split("http://localhost:3000/courses/");
-  console.log(realurl);
   fetch("http://localhost:3000/api/courses/" + realurl[1])
     .then((res) => res.json())
     .then((data) => {
@@ -231,5 +230,4 @@ function modifyCourse(evt) {
     coursePeriod: coursePeriodContent,
   };
   CUD("PUT", `http://localhost:3000/api/courses/${courseidvalue}`, bodyJSON);
-  console.log(bodyJSON);
 }
