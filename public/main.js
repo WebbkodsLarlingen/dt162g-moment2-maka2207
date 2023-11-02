@@ -24,9 +24,9 @@ function loadcourse(url) {
       tbody.innerHTML = "";
       if (!data.message) {
         // Next loop through it from courses JSON data
-        tbody.innerHTML += `<tr><td contenteditable="true">${data.courseId}</td>
-  <td contenteditable="true">${data.courseName}</td>
-  <td contenteditable="true">${data.coursePeriod}</td>
+        tbody.innerHTML += `<tr><td contenteditable="true" data-courseidold="${data.courseId}">${data.courseId}</td>
+  <td contenteditable="true" data-coursenameold="${data.courseName}">${data.courseName}</td>
+  <td contenteditable="true" data-courseperiodold="${data.coursePeriod}">${data.coursePeriod}</td>
   <td style="text-align:center;"data-deletecourse="${data._id}">🗑️</td></tr>`;
       } else {
         apistatus.innerHTML = "Kursen du navigerade till finns inte!";
@@ -44,9 +44,9 @@ function loadCourses() {
       tbody.innerHTML = "";
       // Next loop through it from courses JSON data
       data.forEach((course) => {
-        tbody.innerHTML += `<tr><td contenteditable="true">${course.courseId}</td>
-  <td contenteditable="true">${course.courseName}</td>
-  <td contenteditable="true">${course.coursePeriod}</td>
+        tbody.innerHTML += `<tr><td contenteditable="true" data-courseidold="${course.courseId}">${course.courseId}</td>
+  <td contenteditable="true" data-coursenameold="${course.courseName}">${course.courseName}</td>
+  <td contenteditable="true" data-courseperiodold="${course.coursePeriod}">${course.coursePeriod}</td>
   <td style="text-align:center;"data-deletecourse="${course._id}">🗑️</td></tr>`;
       });
     });
@@ -73,13 +73,40 @@ function CUD(method, url, jsonbody = null) {
   return fetch(url, options)
     .then((res) => {
       if (!res.ok) {
-        return res.json().then((data) => (apistatus.innerHTML = data.message));
+        return res.json().then((data) => {
+          apistatus.innerHTML = data.message;
+          // If Method was PUT and it was denied we also need to change back previos values which we have stored in data attributes!
+          if (method.toUpperCase() == "PUT") {
+            // So, grab the correct row by using `_id` value from `url`
+            const correctrowId = url.split(
+              "http://localhost:3000/api/courses/"
+            )[1];
+            // Then grab that row
+            const correctRow = document
+              .querySelector(`[data-deletecourse="${correctrowId}"]`)
+              .closest("tr");
+            // And reset the old values stored in their "data-{}old" attributes!
+            correctRow.children[0].textContent =
+              correctRow.children[0].dataset.courseidold;
+            correctRow.children[1].textContent =
+              correctRow.children[1].dataset.coursenameold;
+            correctRow.children[2].textContent =
+              correctRow.children[2].dataset.courseperiodold;
+          }
+        });
       }
       // When response is OK, just fetch the current courses!
       if (res.ok) {
         return res.json().then((data) => {
           apistatus.innerHTML = data.message;
           loadCourses();
+          // If method was POST also clear input fields after success
+          if (method.toUpperCase() == "POST") {
+            document.forms[0][0].value = "";
+            document.forms[0][1].value = "";
+            document.forms[0][2].value = "";
+          }
+          // IF method was PUT
         });
       }
     })
@@ -137,13 +164,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Listening for clicks on "Lägg till kurs"
   addcourseBtn.addEventListener("click", (e) => {
-    addcourse();
+    e.preventDefault(); // Don't reload page
+    addcourse(); // Run add course function!
   });
 
-  // Listen for changing the content of the <td> that have contenteditable enabled!
-  tbody.addEventListener("input", (e) => {
+  // Listen for changing the content of the <td> that have contenteditable enabled
+  // by listening for when it leaves focus which can only happen after first entering it
+  tbody.addEventListener("focusout", (e) => {
     if (e.target.tagName === "TD" && e.target.isContentEditable) {
-      console.log("Yup!");
+      // Grab the entire row and send that to modifyCourse function!
+      const evt = e.target.closest("tr");
+      modifyCourse(evt);
     }
   });
 });
@@ -171,4 +202,34 @@ function resetCourses() {
 }
 
 // Add course by sending form data from "Kurskod", "Kursnamn" & "Kursperiod"
-function addcourse() {}
+function addcourse() {
+  // Grab Form and then create body JSON out of its values in its input fields!
+  const form = document.forms[0];
+  const bodyJSON = {
+    courseId: form[0].value,
+    courseName: form[1].value,
+    coursePeriod: form[2].value,
+  };
+  // Send POST to CUD function (Create, Update, Delete with Fetch())
+  CUD("POST", "http://localhost:3000/api/courses", bodyJSON);
+  // The "CUD" function will reload courses if response OK!
+}
+
+// Update course when editing in contenteditable <td> elements under <tbody> element!
+function modifyCourse(evt) {
+  // Grab textContent from the <td> elements from that <tr>
+  let courseIdContent = evt.children[0].textContent;
+  let courseNameContent = evt.children[1].textContent;
+  let coursePeriodContent = evt.children[2].textContent;
+  let courseidvalue = evt.children[3].dataset.deletecourse;
+
+  // And put them into Body JSON to send!
+  const bodyJSON = {
+    _id: courseidvalue,
+    courseId: courseIdContent,
+    courseName: courseNameContent,
+    coursePeriod: coursePeriodContent,
+  };
+  CUD("PUT", `http://localhost:3000/api/courses/${courseidvalue}`, bodyJSON);
+  console.log(bodyJSON);
+}

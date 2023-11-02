@@ -13,7 +13,19 @@
   <body>
     <header><h1>NodeJS - Moment 2 | NodeJS Webbtjänst med JSON-fil</h1></header>
     <main>
-      <h2>Kurser jag har läst:</h2>
+      <h2>Kurser för år 2:</h2>
+      <p
+        style="
+          text-align: center;
+          margin: 1rem;
+          padding: 1rem;
+          line-height: 1.5;
+        ">
+        Du kan ändra direkt i tabellraderna (under Kurskod, Kursnamn & Period
+        tack contentEditable-attributet) och när du lämnar fokus så skickas
+        PUT-anrop! All CRUD funkar även att göra i Thunderclient direkt mot
+        API:t om inte webbklienten önskas.
+      </p>
       <table id="courseTable">
         <thead>
           <tr>
@@ -27,7 +39,9 @@
         <tfoot></tfoot>
       </table>
       <h2>Lägg till ny kurs</h2>
-      <div class="form-part form-btn"><p id="status"></p></div>
+      <div class="form-part form-btn">
+        <p id="status">&lt;Här visas meddelanden från REST API!&gt;</p>
+      </div>
       <form>
         <div class="form-part">
           <div class="inner-form">
@@ -47,7 +61,6 @@
           <div class="form-part form-btn">
             <button id="postCourse">Lägg till kurs</button>
             <button id="resetcourses">Återställ allt</button>
-            <button id="abortUpdate" style="display: none">Avbryt</button>
           </div>
         </div>
       </form>

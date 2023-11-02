@@ -408,12 +408,9 @@ router.post("/courses", (req, res) => {
           });
         }
       } catch (e) {
-        return res
-          .status(500)
-          .json({
-            message:
-              "Kunde ej skriva till filen (catch:ad). Kontakta ansvarig!",
-          });
+        return res.status(500).json({
+          message: "Kunde ej skriva till filen (catch:ad). Kontakta ansvarig!",
+        });
       }
     }
   });
