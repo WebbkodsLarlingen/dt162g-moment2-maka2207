@@ -2,6 +2,16 @@
 
 ## Moment 2 - NodeJS
 
+### KOMMA IGÅNG lokalt
+
+1. Dra hem repo med git clone.
+
+2. Kör `npm install` i Terminalen för att installera allt.
+
+3. Kör `npm start` för att starta lokalt och besök sedan: http://localhost:3000/ alternativt http://localhost:3000/courses
+
+### ENDPOINTS MED MERA
+
 _BRA ATT VETA:_ Meddelanden från REST API-webbtjänsten visas under rubriken "Lägg till ny kurs" i webbklienten via `message:`-JSON-objektegenskapen.
 
 - Endpoints (när data hämtas via REST API Webbtjänst):
@@ -20,7 +30,7 @@ Skulle en kurs inte finnas som försöker kommas åt i webbläsaren så meddelas
 
 _OBS:_ När du lägger till, raderar eller modifierar enbart en visad kurs så kommer den att ladda om alla övriga tillgängliga kurser på nytt dock!
 
-**\_VIKTIGT:** I webbläsaren kan du lägga till ny kurs, radera befintliga kurser, återställa allt (raderar `courses.json` och kopierar `courses-BACKUP.json` till ny `courses.json`), och redigera befintliga kurser genom att skriva i deras `contentEditable`-fält (dessa gäller kolumnerna Kurskod, Kursnamn och Period).
+**\_VIKTIGT:** I webbläsaren kan du lägga till ny kurs, radera befintliga kurser, återställa allt (raderar `courses.json` och kopierar `courses-BACKUP.json` till ny `courses.json`), och redigera befintliga kurser genom att skriva i deras `contentEditable`-fält och sedan lämna/byta fokus från dem (dessa gäller kolumnerna Kurskod, Kursnamn och Period).
 
 Mycket nöje!
 
