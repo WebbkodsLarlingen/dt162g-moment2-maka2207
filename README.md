@@ -16,11 +16,11 @@ _BRA ATT VETA:_ Meddelanden från REST API-webbtjänsten visas under rubriken "L
 
 - Endpoints (när data hämtas via REST API Webbtjänst):
 
-  - GET http://localhost:3000/api/courses - Hämta all kurser
+  - GET http://localhost:3000/api/courses ELLER: GET http://localhost:3000/courses - Hämta all kurser
   - POST http://localhost:3000/api/courses - Lägg till ny kurs
-  - GET http://localhost:3000/api/courses/:id - Hämta kurs med :id = \_id
+  - GET http://localhost:3000/api/courses/:id ELLER: GET http://localhost:3000/courses/:id - Hämta kurs med :id = \_id
   - PUT http://localhost:3000/api/courses/:id - Uppdatera kurs med :id = \_id
-  - DELETE http://localhost:3000/api/courses/:id - Radera kurs med :id = \_id
+  - DELETE http://localhost:3000/api/courses/:id ELLER: DELETE http://localhost:3000/courses/:id - Radera kurs med :id = \_id
 
 - Endpoints i webbläsaren (när du skriver in direkt i webbläsarens adressfält):
   - http://localhost:3000/courses/ - Hämta alla kurser
